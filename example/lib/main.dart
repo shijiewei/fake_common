@@ -53,10 +53,78 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+        body: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView.builder(
+            itemCount: 1,
+            itemBuilder: (context, i)=> renderRow(i,context),
+          ),
         ),
       ),
+    );
+  }
+
+  void showPrivacyAlert(String text, BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+            title: const Text("隐私协议"),
+            content: Text(text),
+            actions: <Widget>[
+              FlatButton(
+                child: const Text("同意"),
+                onPressed: () {
+                  // 关闭弹框
+                  Navigator.of(context).pop();
+                  FakeCommon.submitPolicyGrantResult(true, (dynamic ret, Map err) => {
+                    if(err!=null) {
+                      // nothing to do
+                    } else {
+                      // nothing to do
+                    }
+                  });
+                },
+              ),
+              FlatButton(
+                child: const Text("拒绝"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  FakeCommon.submitPolicyGrantResult(false, (dynamic ret, Map err) => {
+                    if(err!=null)
+                      {
+                        // nothing to do
+                      }
+                    else
+                      {
+                        // nothing to do
+                      }
+                  });
+                },
+              )
+            ]));
+  }
+
+  Widget renderRow(i, BuildContext context){
+    return Column(
+
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          height: 30,
+        ),
+        Text('Running on: $_platformVersion\n'),
+        ConstrainedBox(
+          constraints: const BoxConstraints(minWidth: double.infinity),
+          child: FlatButton(
+            color: Colors.blueGrey,
+            textColor: Colors.white,
+            child: const Text('打开隐私协议弹框'),
+            onPressed: (){
+              showPrivacyAlert('是否同意隐私协议？',context);
+            },
+          ),
+        ),
+      ],
     );
   }
 }

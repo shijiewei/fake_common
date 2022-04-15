@@ -1,5 +1,7 @@
 package com.example.fake.common.fake_common;
 
+import com.mob.MobSDK;
+
 import androidx.annotation.NonNull;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
@@ -8,6 +10,7 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 
+// Step-3：java层接口实现
 /** FakeCommonPlugin */
 public class FakeCommonPlugin implements FlutterPlugin, MethodCallHandler {
   /// The MethodChannel that will the communication between Flutter and native Android
@@ -18,7 +21,7 @@ public class FakeCommonPlugin implements FlutterPlugin, MethodCallHandler {
 
   @Override
   public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-    channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "fake_common");
+    channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "FakeCommon");
     channel.setMethodCallHandler(this);
   }
 
@@ -26,7 +29,11 @@ public class FakeCommonPlugin implements FlutterPlugin, MethodCallHandler {
   public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
     if (call.method.equals("getPlatformVersion")) {
       result.success("Android " + android.os.Build.VERSION.RELEASE);
-    } else {
+    } else if (call.method.equals("submitPolicyGrantResult")) {
+		boolean granted = call.argument("granted");
+		FCLog.d("granted: " + granted);
+		MobSDK.submitPolicyGrantResult(granted, null);
+	} else {
       result.notImplemented();
     }
   }

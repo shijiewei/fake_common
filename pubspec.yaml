@@ -1,11 +1,12 @@
 name: fake_common
 description: A new Flutter project.
-version: 0.0.1
+version: 0.0.3
 homepage:
 
 environment:
   sdk: ">=2.16.2 <3.0.0"
-  flutter: ">=2.5.0"
+#  flutter: ">=2.5.0"
+  flutter: ">=1.20.0"  # 限定flutter sdk版本号(embedding v2)
 
 dependencies:
   flutter:

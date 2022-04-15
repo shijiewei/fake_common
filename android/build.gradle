@@ -16,6 +16,10 @@ rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
+        // step-1：添加仓库
+        maven {
+            url "https://mvn.mob.com/android"
+        }
     }
 }
 
@@ -32,4 +36,12 @@ android {
     defaultConfig {
         minSdkVersion 16
     }
+}
+
+dependencies {
+    // step-2：添加公共库依赖和业务sdk依赖
+    compileOnly 'com.mob:MobCommonsMCFP:2022.0218.1419'
+    compileOnly 'com.mob:MobToolsMCFP:2022.0218.1419'
+    compileOnly 'com.mob:MobGuardMCFP:2022.0218.1419@aar'
+    compileOnly 'com.mob:MobGUI:2019.0306.1850'
 }

@@ -54,3 +54,12 @@ android {
 flutter {
     source '../..'
 }
+
+apply plugin: 'com.mob.sdk'
+MobSDK {
+    // 灰度key：17adc4c482143，非灰key：34adc4c48214f
+    appKey '17adc4c482143'
+    appSecret "0da6fae9f10701ca5c26c4270c07c221"
+    // 不使用任何sdk时，环境判断结果可能会有问题，导致公共库拉包出现问题
+    SMSSDK {}
+}
