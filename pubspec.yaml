@@ -1,7 +1,7 @@
 name: fake_common
-description: A new Flutter project.
-version: 0.0.3
-homepage:
+description: Fake common test project.
+version: 0.0.4
+homepage: https://www.mob.com/
 
 environment:
   sdk: ">=2.16.2 <3.0.0"

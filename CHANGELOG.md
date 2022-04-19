@@ -1,3 +1,8 @@
-## 0.0.1
+## 0.0.4
+纯离线方式集成公共库
 
-* TODO: Describe initial release.
+## 0.0.3
+compileOnly方式集成公共库
+
+## 0.0.1
+初版做成

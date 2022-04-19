@@ -10,7 +10,7 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 
-// Step-3：java层接口实现
+// Step-2：java层接口实现
 /** FakeCommonPlugin */
 public class FakeCommonPlugin implements FlutterPlugin, MethodCallHandler {
   /// The MethodChannel that will the communication between Flutter and native Android

@@ -16,10 +16,6 @@ rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
-        // step-1：添加仓库
-        maven {
-            url "https://mvn.mob.com/android"
-        }
     }
 }
 
@@ -39,9 +35,13 @@ android {
 }
 
 dependencies {
-    // step-2：添加公共库依赖和业务sdk依赖
-    compileOnly 'com.mob:MobCommonsMCFP:2022.0218.1419'
-    compileOnly 'com.mob:MobToolsMCFP:2022.0218.1419'
-    compileOnly 'com.mob:MobGuardMCFP:2022.0218.1419@aar'
-    compileOnly 'com.mob:MobGUI:2019.0306.1850'
+    /*
+     * step-1：添加原生jar包依赖（必须使用仅编译方式）
+     * 此依赖方式有一些限制需注意：
+     * 1.由于这里使用"仅编译"方式做依赖，因此最终打包apk时，不会将这里的包打进去，而需要依赖于app模块的依赖，
+     * 也就是说，插件发布上线后，作为开发者集成使用相应的插件，必须保证通过MobSDK依赖我们的sdk，打包apk后，整个应用都将依赖与这个包
+     * 2.由于sdk依赖实际上是通过app模块的MobSDK拉取，因此版本兼容等都是取决于app模块的MobSDK拉下来的版本，与插件层通过"仅编译"方式
+     * 引入的离线包无关
+     */
+    compileOnly fileTree(dir: "libs", include: ["*.jar", "*.aar"], exclude: [])
 }
